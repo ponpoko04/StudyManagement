@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/controler/mainControler.py=utf-8
+encoding//src/dispatchers/studyManagement.py=utf-8
+encoding//src/model/datamodels.py=utf-8
+encoding//src/model/dsmodels.py=utf-8
+encoding//tests/basetest.py=utf-8
+encoding//tests/test_controler/test_mainControler.py=utf-8
+encoding//tests/testconfig.py=utf-8
+encoding/main.py=utf-8

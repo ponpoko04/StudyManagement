@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+			  content="
+				height = device-height ,
+				width = device-width ,
+				initial-scale = 1.5 ,
+				minimum-scale = 1.0 ,
+				maximum-scale = 3.0 ,
+				user-scalable = yes ,
+				target-densitydpi = device-dpi" />
+		<title>SelfStudyManagement</title>
+		<link rel="shortcut icon" href="//ayastudymg.appspot.com/img/favicon.ico" type="/img/favicon.ico">
+		<link rel="apple-touch-icon" href="//ayastudymg.appspot.com/img/apple-touch-icon.png" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css">
+		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
+		<link type="text/css" rel="stylesheet" href="/stylesheets/buttons.css">
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.dateValidate.js"></script>
+		<script type="text/javascript" src="/js/index.js"></script>
+	</head>
+	<body>
+		<!-- 認証画面 && 登録・一覧画面 -->
+		<header class="bottom-line">
+			<div style="font-size: 20px;">勉強管理</div>
+		</header>
+
+		{% if isAuth %}
+		<nav>
+			<ul>
+				<li>
+					<a href='#' class="button button-pill button-primary">
+						<img alt="" src="/img/blue-home-icon.png" class="home">
+						Home
+					</a>
+				</li>
+				<li>
+					<a href='#' class="button button-pill button-action">
+						<img alt="" src="/img/Actions-view-list-text-icon.png" class="list">
+						日付別一覧
+					</a>
+				</li>
+				<li>
+					<a href='/subject' class="button button-pill button-highlight">
+						<img alt="" src="/img/maintenance-icon.png" class="subjectMainte">
+						科目メンテ
+					</a>
+				</li>
+			</ul>
+		</nav>
+		{% endif %}
+
+		<section class="main">
+			{% if isAuth %}
+			<section class="formSection top-line">
+				<form action='#'>
+					<section style="margin: 5px 10px;">
+						<div>
+							<span style="display:inline-block; width:40px;">科目</span>
+							<select name='item' id='item'>
+								{% for subject in subjects %}
+									{% if subject != None %}
+									<option value="{{ subject.key }}">{{ subject.subjectName }}</option>
+									{% else %}
+									<option value="0">Not Data</option>
+									{% endif %}
+								{% endfor %}
+							</select>
+						</div>
+						<div>
+							<span style="display:inline-block; width:40px;">内容</span>
+							<input type='text' id='content'/>
+						</div>
+						<div>
+							<span style="display:inline-block; width:40px;">時間</span>
+							<select name='studyTimeYear' id='studyTimeYear'>
+								{% for year in years %}
+									{% if year == None %}
+									<option value="0">Not Found</option>
+									{% else %}
+										{% if year.selected %}
+										<option value="{{ year.value }}" selected="selected">{{ year.value }}</option>
+										{% else %}
+										<option value="{{ year.value }}">{{ year.value }}</option>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							</select>
+							年
+							<select name='studyTimeMonth' id='studyTimeMonth'>
+								{% for month in months %}
+									{% if month == None %}
+									<option value="0">Not Found</option>
+									{% else %}
+										{% if month.selected %}
+										<option value="{{ month.value }}" selected="selected">{{ month.value }}</option>
+										{% else %}
+										<option value="{{ month.value }}">{{ month.value }}</option>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							</select>
+							月
+							<select name='studyTimeDay' id='studyTimeDay'>
+								{% for day in days %}
+									{% if day == None %}
+									<option value="0">Not Found</option>
+									{% else %}
+										{% if day.selected %}
+										<option value="{{ day.value }}" selected="selected">{{ day.value }}</option>
+										{% else %}
+										<option value="{{ day.value }}">{{ day.value }}</option>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							</select>
+							日
+						</div>
+						<div>
+							<span style="display:inline-block; width:40px;"></span>
+							<select name='studyTimeHour' id='studyTimeHour'>
+								{% for hour in hours %}
+									{% if hour == None %}
+									<option value="0">Not Found</option>
+									{% else %}
+									<option value="{{ hour }}">{{ hour }}</option>
+									{% endif %}
+								{% endfor %}
+							</select>
+							時間
+							<select name='studyTimeMinute' id='studyTimeMinute'>
+								{% for minute in minutes %}
+									{% if minute == None %}
+									<option value="0">Not Found</option>
+									{% else %}
+									<option value="{{ minute }}">{{ minute }}</option>
+									{% endif %}
+								{% endfor %}
+							</select>
+							分
+						</div>
+					</section>
+					<section>
+						<input type='submit' id='register' value='登録'>
+					</section>
+				</form>
+			</section>
+
+			<section class="studyTimeSection top-line">
+				<span>合計学習時間</span>
+				<table class="totalStudyTimeTable">
+					<colgroup>
+						<col style="width: 120px;" />
+						<col style="width: 120px;" />
+						<col style="width: 60px;" />
+					</colgroup>
+					{% for studyTime in studyTimes %}
+						{% if studyTime != None %}
+						<tr>
+							<th style="text-align: left;"><a href="#">{{ studyTime.subjectName }}</a></th>
+							<td style="text-align: right;">{{ studyTime.sumHour }}時間</td>
+							<td style="text-align: right;">{{ studyTime.sumMinute }}分</td>
+						</tr>
+						{% else %}
+						<tr><td>Not Data</td></tr>
+						{% endif %}
+					{% endfor %}
+				</table>
+			</section>
+			{% else %}
+				<span style="display: inline-block; margin-top: 5px;">
+					こんにちは！こちらから<a href="{{ url }}" style="display: inline-block;"><img alt="" src="/img/logout-icon.png" class="logout">{{ url_linktext }}</a>して下さい。
+				</span>
+			{% endif %}
+		</section>
+
+		<footer>
+		</footer>
+	</body>
+</html>
