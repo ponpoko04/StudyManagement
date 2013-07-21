@@ -27,7 +27,7 @@ class mainControler(object):
 
     def createLoginInfo(self, reqUri):
         '''
-                ログイン情報を構築します
+        ログイン情報を構築します
         '''
         if users.get_current_user() is None:
             self.url = users.create_login_url(reqUri)
@@ -36,7 +36,7 @@ class mainControler(object):
 
     def getYearsList(self):
         '''
-                年の配列を取得します
+        年の配列を取得します
         '''
         years = []
         for i in range(self.d.year - 2, self.d.year + 10):
@@ -49,7 +49,7 @@ class mainControler(object):
 
     def getMonthsList(self):
         '''
-                月の配列を取得します
+        月の配列を取得します
         '''
         months = []
         for i in range(1, 13):
@@ -62,7 +62,7 @@ class mainControler(object):
 
     def getDaysList(self):
         '''
-                日の配列を取得します
+        日の配列を取得します
         '''
         days = []
         for i in range(1, 32):
@@ -75,7 +75,7 @@ class mainControler(object):
 
     def sumUpStudyHours(self, studyUnits):
         '''
-                科目ごとの勉強時間集計を行います
+        科目ごとの勉強時間集計を行います
         '''
         tmpStudyHours = {}
         tmpStudyMinutes = {}
@@ -95,7 +95,7 @@ class mainControler(object):
 
     def sumUpHours(self, subjectName, hour, tmpStudyHours):
         '''
-                時間を集計します
+        時間を集計します
         '''
         if subjectName in tmpStudyHours:
             tmpStudyHours[subjectName] += hour
@@ -106,7 +106,7 @@ class mainControler(object):
 
     def sumUpMinutes(self, subjectName, minute, tmpStudyHours, tmpStudyMinutes):
         '''
-                分を集計します
+        分を集計します
         '''
         if subjectName in tmpStudyMinutes:
             tmpStudyMinutes[subjectName] += minute

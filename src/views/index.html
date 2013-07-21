@@ -17,7 +17,8 @@
 		<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css">
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
 		<link type="text/css" rel="stylesheet" href="/stylesheets/buttons.css">
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/common.js"></script>
 		<script type="text/javascript" src="/js/index.js"></script>
 	</head>
 	<body>
@@ -30,13 +31,13 @@
 		<nav>
 			<ul>
 				<li>
-					<a href='#' class="button button-pill button-primary">
+					<a href='/' class="button button-pill button-primary">
 						<img alt="" src="/img/blue-home-icon.png" class="home">
 						Home
 					</a>
 				</li>
 				<li>
-					<a href='#' class="button button-pill button-action">
+					<a href='/listPerDate' class="button button-pill button-action">
 						<img alt="" src="/img/Actions-view-list-text-icon.png" class="list">
 						日付別一覧
 					</a>
@@ -158,7 +159,7 @@
 					{% for studyTime in studyTimes %}
 						{% if studyTime != None %}
 						<tr>
-							<th style="text-align: left;"><a href="#">{{ studyTime.subjectName }}</a></th>
+							<th style="text-align: left;">{{ studyTime.subjectName }}</th>
 							<td style="text-align: right;">{{ studyTime.sumHour }}時間</td>
 							<td style="text-align: right;">{{ studyTime.sumMinute }}分</td>
 						</tr>
@@ -174,8 +175,5 @@
 				</span>
 			{% endif %}
 		</section>
-
-		<footer>
-		</footer>
 	</body>
 </html>

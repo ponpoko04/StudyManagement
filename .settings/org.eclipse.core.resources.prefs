@@ -1,6 +1,10 @@
+#Mon Jul 15 16:25:58 JST 2013
 eclipse.preferences.version=1
+encoding//js/subjectMainte.js=UTF-8
 encoding//src/controler/mainControler.py=utf-8
+encoding//src/dispatchers/listPerDate.py=utf-8
 encoding//src/dispatchers/studyManagement.py=utf-8
+encoding//src/dispatchers/subjectMainte.py=utf-8
 encoding//src/model/datamodels.py=utf-8
 encoding//src/model/dsmodels.py=utf-8
 encoding//tests/basetest.py=utf-8

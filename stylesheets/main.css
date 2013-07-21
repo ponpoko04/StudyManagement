@@ -79,7 +79,9 @@ a img.logout
   margin: 7px 5px 6px 0;
 }
 
-.totalStudyTimeTable {
+.totalStudyTimeTable,
+.allStudyUnitsTable
+{
     border-spacing: 0;
 
     border: 1px solid #CCC;
@@ -90,14 +92,19 @@ a img.logout
     box-shadow: 0 1px 1px #CCC;
 }
 .totalStudyTimeTable th,
-.totalStudyTimeTable td {
-    padding:10px;
+.totalStudyTimeTable td,
+.allStudyUnitsTable th,
+.allStudyUnitsTable td 
+{
+	padding:10px;
     background:#FFF;
     border-bottom:solid 1px #CCC;
     border-right:solid 1px #CCC;
 }
-.totalStudyTimeTable th {
-    background:#e3dcd5;
+.totalStudyTimeTable th,
+.allStudyUnitsTable th
+{
+	background:#e3dcd5;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
     color:#69655c;
 }

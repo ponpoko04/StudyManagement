@@ -34,6 +34,15 @@ var index = $.extend({
 					var isExist = tableTag.find('tbody').length === 0 ? false : true;
 					if (!isExist) { tableTag.append('<tbody></tbody>'); }
 					tableTag.find('tbody').append(data);
+					
+					// 入力内容の初期化
+					$('#item').val($('#item').find('option').eq(1).val());
+					$('#content').val('');
+					$('#studyTimeYear').val(tmpDate.getFullYear());
+					$('#studyTimeMonth').val(('00' + (tmpDate.getMonth() + 1)).slice(-2));
+					$('#studyTimeDay').val(tmpDate.getDate());
+					$('#studyTimeHour').val('00');
+					$('#studyTimeMinute').val('00');
 				}, 'html');
 		return;
 	}
@@ -42,6 +51,10 @@ var index = $.extend({
 $(document).ready(function() {
 	// 登録ボタン
 	$('#register').unbind('click').bind('click',function(e){
-		return index.register(e);
+		var $button = $(this);
+		common.btnDisabled($button);
+		index.register(e);
+		common.btnEnabled($button);
+		return 
 	});
 });

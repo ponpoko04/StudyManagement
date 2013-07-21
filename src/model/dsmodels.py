@@ -11,14 +11,14 @@ from google.appengine.ext import db
 
 class Subject(db.Model):
     '''
-        科目マスタモデル
+    科目マスタモデル
     '''
     registrant = db.UserProperty(required=True)     #登録者
     subjectName = db.StringProperty()               #科目名
 
 class StudyUnit(db.Model):
     '''
-        勉強単位モデル
+    勉強単位モデル
     '''
     registrant = db.UserProperty(required=True)         #登録者
     subject = db.ReferenceProperty(Subject)             #科目

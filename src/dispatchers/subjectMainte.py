@@ -16,10 +16,14 @@ import dsmodels
 from google.appengine.api import users
 from google.appengine.ext.webapp import template
 
-#科目メンテ
 class SubjectMainte(webapp2.RequestHandler):
-    #科目メンテ 表示
+    '''
+    科目メンテ画面
+    '''
     def get(self):
+        '''
+        科目メンテ 初期表示
+        '''
         subjects = dsmodels.Subject.all().filter('registrant = ', users.get_current_user())
 
         template_values = {
@@ -28,8 +32,10 @@ class SubjectMainte(webapp2.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), '../views/subjectMainte.html')
         self.response.out.write(template.render(path, template_values))
 
-    #科目メンテ 登録
     def post(self):
+        '''
+        科目メンテ 登録
+        '''
         #入力された科目を登録します
         newSubject = dsmodels.Subject(registrant=users.get_current_user(),
                              subjectName=self.request.get('subjectName'))
@@ -54,8 +60,10 @@ class SubjectMainte(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.out.write(responseHtml)
 
-#科目メンテ 更新
 class UpdateSubject(webapp2.RequestHandler):
+    '''
+    科目メンテ 更新処理
+    '''
     def post(self):
         #変更された科目を更新します
         updateSubject = dsmodels.Subject(key=self.request.get('updateKey'),
@@ -67,8 +75,10 @@ class UpdateSubject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(json.dumps(json_to_send))
 
-#科目メンテ 削除
 class DeleteSubject(webapp2.RequestHandler):
+    '''
+    科目メンテ 削除処理
+    '''
     def post(self):
         #科目、科目を使用している勉強単位を削除します
         deleteSubject = dsmodels.Subject(key=self.request.get('deleteKey'),

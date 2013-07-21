@@ -10,11 +10,14 @@ import webapp2
 import appengine_config
 
 routes = [
-  ('/',              'studyManagement.MainPage'),
-  ('/register',      'studyManagement.MainPage'),
-  ('/subject',       'subjectMainte.SubjectMainte'),
-  ('/updateSubject', 'subjectMainte.UpdateSubject'),
-  ('/deleteSubject', 'subjectMainte.DeleteSubject')
+  ('/',                   'studyManagement.MainPage'),
+  ('/register',           'studyManagement.MainPage'),
+  ('/listPerDate/search', 'listPerDate.ListPerDate'),
+  ('/listPerDate/update', 'listPerDate.UpdateExistDate'),
+  ('/listPerDate',        'listPerDate.ListPerDate'),
+  ('/subject',            'subjectMainte.SubjectMainte'),
+  ('/updateSubject',      'subjectMainte.UpdateSubject'),
+  ('/deleteSubject',      'subjectMainte.DeleteSubject')
 ]
 
 app = webapp2.WSGIApplication(routes,debug=True)

@@ -1,0 +1,32 @@
+<table class="allStudyUnitsTable">
+	<colgroup>
+		<col style="width: 100px;" />
+		<col style="width: 300px;" />
+		<col style="width: 130px;" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th><span style="display:inline-block; width:40px;">科目</span></th>
+			<th><span style="display:inline-block; width:40px;">内容</span></th>
+			<th><span style="display:inline-block; width:40px;">時間</span></th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for studyUnit in studyUnits %}
+		{% if studyUnit != None %}
+		<tr>
+			<td>
+				<span style="display:inline-block;">{{ studyUnit.subject.subjectName }}</span>
+			</td>
+			<td>
+				<span style="display:inline-block;">{{ studyUnit.content }}</span>
+			</td>
+			<td style="text-align: right;">
+				<span style="display:inline-block;">{{ studyUnit.studyTimeHour }} 時間</span>
+				<span style="display:inline-block;">{{ studyUnit.studyTimeMinute }} 分</span>
+			</td>
+		</tr>
+		{% endif %}
+	{% endfor %}
+	</tbody>
+</table>

@@ -18,12 +18,12 @@ from google.appengine.ext.webapp import template
 
 class MainPage(webapp2.RequestHandler):
     '''
-        勉強管理画面
+    勉強管理画面
     '''
     #勉強管理 表示
     def get(self):
         '''
-                勉強管理 初期表示
+        勉強管理 初期表示
         '''
         controler = mainControler()
         controler.createLoginInfo(self.request.uri)
@@ -58,7 +58,7 @@ class MainPage(webapp2.RequestHandler):
 
     def post(self):
         '''
-                勉強管理 登録
+        勉強管理 登録
         '''
         #入力された勉強記録を登録します
         subject = dsmodels.Subject(key=self.request.get('item'),

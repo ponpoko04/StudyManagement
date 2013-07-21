@@ -1,0 +1,6 @@
+
+{% for existDataList in existDataLists %}
+	{% if existDataList != None %}
+	<input type="hidden" class="exist-data-lists" value="{{ existDataList }}">
+	{% endif %}
+{% endfor %}
