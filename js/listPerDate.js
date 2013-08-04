@@ -46,8 +46,11 @@ var listPerDate = $.extend({
 	// 勉強単位データが存在する日付にスタイルを追加します
 	addExistDataFlg: function() {
 		var $existDataLists = $('.exist-data-lists');
+		var $calCells = $('#calendar').find('.fc-body').find('.js-cell').children('.fc-date');
+		
+		$calCells.removeClass('exist-data');
 		for(var i = 0; i <= $existDataLists.length - 1; i++) {
-			$.each($('#calendar').find('.fc-body').find('.js-cell').children('.fc-date'), function() {
+			$.each($calCells, function() {
 				if (+$existDataLists.get(i).value == $(this).text()) {
 					$(this).addClass('exist-data');
 				}	
@@ -64,7 +67,6 @@ var listPerDate = $.extend({
 			function(data) {
 				// 日付別一覧部を書き換えます
 				$('#existDataArea').html(data);
-				listPerDate.addDelBtnClickEvent();
 			}, 'html');
 		return;
 	},
@@ -76,6 +78,8 @@ var listPerDate = $.extend({
 				function(msg) {
 					alert(msg.deleteMsg);
 					$_.parent().parent().remove();
+					// データ存在目印の更新
+					listPerDate.updateExistDataList();
 					setTimeout(function() { listPerDate.addExistDataFlg(); }, 1000);
 				}, 'json');
 		return;
