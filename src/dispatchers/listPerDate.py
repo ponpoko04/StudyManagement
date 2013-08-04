@@ -10,6 +10,7 @@ Created on 2013/07/15
 import os
 import webapp2
 import datetime
+import json
 
 import dsmodels
 
@@ -83,8 +84,22 @@ class UpdateExistDate(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.out.write(template.render(path, template_values))
         
+class DeleteStudyUnit(webapp2.RequestHandler):
+    '''
+    勉強単位を削除します
+    '''
 
+    def post(self):
+        '''
+        キーを元に勉強単位を削除します
+        '''
+        
+        deleteStudyUnit = dsmodels.StudyUnit(key=self.request.get('deleteKey'),
+                                             registrant=users.get_current_user())
+        deleteStudyUnit.delete()
 
-
+        json_to_send = {'deleteMsg': '削除しました。'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write(json.dumps(json_to_send))
 
         

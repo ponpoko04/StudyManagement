@@ -36,11 +36,11 @@ var index = $.extend({
 					tableTag.find('tbody').append(data);
 					
 					// 入力内容の初期化
-					$('#item').val($('#item').find('option').eq(1).val());
+					$('#item').val($('#item').find('option').eq(0).val());
 					$('#content').val('');
 					$('#studyTimeYear').val(tmpDate.getFullYear());
 					$('#studyTimeMonth').val(('00' + (tmpDate.getMonth() + 1)).slice(-2));
-					$('#studyTimeDay').val(tmpDate.getDate());
+					$('#studyTimeDay').val(('00' + (tmpDate.getDate())).slice(-2));
 					$('#studyTimeHour').val('00');
 					$('#studyTimeMinute').val('00');
 				}, 'html');

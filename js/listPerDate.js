@@ -1,6 +1,6 @@
 var listPerDate = $.extend({
 	// イベント追加
-	addClickEvent: function() {
+	addCalClickEvent: function() {
 		// クリック日付取得
 		$('#calendar').find('.js-cell').off('click').on('click', function(e) {
 			var $clickcell = $(this);
@@ -16,6 +16,17 @@ var listPerDate = $.extend({
 			listPerDate.search(e, $clickday.get(0).innerText);
 		});
 	},
+	// 削除ボタンクリックイベント
+	addDelBtnClickEvent: function() {
+		// 削除ボタン
+		$('.Js-DeleteStudyUnit').off('click').on('click', function(e) {
+			var $button = $(this);
+			common.btnDisabled($button);
+			listPerDate.deleteStudyUnit(e, $button);
+			common.btnEnabled($button);
+			return;
+		});
+	},
 	// 検索します
 	search: function(e, day) {
 		e.preventDefault();
@@ -28,15 +39,16 @@ var listPerDate = $.extend({
 			function(data) {
 				// 日付別一覧部を書き換えます
 				$('table.allStudyUnitsTable').html(data);
+				listPerDate.addDelBtnClickEvent();
 			}, 'html');
 		return;
 	},
 	// 勉強単位データが存在する日付にスタイルを追加します
 	addExistDataFlg: function() {
 		var $existDataLists = $('.exist-data-lists');
-		for(var i = 0; i < $existDataLists.length; i++) {
+		for(var i = 0; i <= $existDataLists.length - 1; i++) {
 			$.each($('#calendar').find('.fc-body').find('.js-cell').children('.fc-date'), function() {
-				if ($existDataLists.get(i).value == $(this).text()) {
+				if (+$existDataLists.get(i).value == $(this).text()) {
 					$(this).addClass('exist-data');
 				}	
 			});
@@ -45,7 +57,6 @@ var listPerDate = $.extend({
 	// 勉強単位データが存在する日付を更新します
 	updateExistDataList: function() {
 		var searchYear = $('#custom-year').text();
-//		var movedMonth = +$('#custom-month').attr('month-key') + monthDiff;
 		var searchMonth = ('00' + $('#custom-month').attr('month-key')).slice(-2);
 
 		// 送信します
@@ -53,7 +64,20 @@ var listPerDate = $.extend({
 			function(data) {
 				// 日付別一覧部を書き換えます
 				$('#existDataArea').html(data);
+				listPerDate.addDelBtnClickEvent();
 			}, 'html');
+		return;
+	},
+	// 削除ボタン押下で勉強単位を削除します
+	deleteStudyUnit: function(e, $_) {
+		e.preventDefault();
+		var deleteKey = $_.attr('name');
+		$.post('/listPerDate/delete', {'deleteKey': deleteKey},
+				function(msg) {
+					alert(msg.deleteMsg);
+					$_.parent().parent().remove();
+					setTimeout(function() { listPerDate.addExistDataFlg(); }, 1000);
+				}, 'json');
 		return;
 	}
 });
@@ -65,11 +89,11 @@ var showCalendar = function() {
 			'OTransition' : 'oTransitionEnd',
 			'msTransition' : 'MSTransitionEnd',
 			'transition' : 'transitionend'
-		},
-		transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
-		$wrapper = $( '#custom-inner' ),
-		$calendar = $( '#calendar' ),
-		cal = $calendar.calendario( {
+		};
+	var transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ];
+	var $wrapper = $( '#custom-inner' );
+	var $calendar = $( '#calendar' );
+	var cal = $calendar.calendario( {
 			onDayClick : function( $el, $contentEl, dateProperties ) {
 				if( $contentEl.length > 0 ) {
 					showEvents( $contentEl, dateProperties );
@@ -77,24 +101,24 @@ var showCalendar = function() {
 			},
 			caldata : codropsEvents,
 			displayWeekAbbr : true
-		} ),
-		$month = $( '#custom-month' ).html( cal.getMonthName() ),
-		$year = $( '#custom-year' ).html( cal.getYear() );
+		} );
+	var $month = $( '#custom-month' ).html( cal.getMonthName() );
+	var $year = $( '#custom-year' ).html( cal.getYear() );
 	
-		$month.attr('month-key', cal.getMonth());
-		listPerDate.addExistDataFlg();
-
-	$( '#custom-next' ).on( 'click', function() {
+	$month.attr('month-key', cal.getMonth());
+	listPerDate.addExistDataFlg();
+	
+	$( '#custom-next' ).off('click').on( 'click', function() {
 		cal.gotoNextMonth( updateMonthYear );
-		listPerDate.addClickEvent();
+		listPerDate.addCalClickEvent();
 		listPerDate.updateExistDataList();
-		setTimeout(function() {listPerDate.addExistDataFlg() }, 3000);
+		setTimeout(function() { listPerDate.addExistDataFlg(); }, 1000);
 	} );
-	$( '#custom-prev' ).on( 'click', function() {
+	$( '#custom-prev' ).off('click').on( 'click', function() {
 		cal.gotoPreviousMonth( updateMonthYear );
-		listPerDate.addClickEvent();
+		listPerDate.addCalClickEvent();
 		listPerDate.updateExistDataList();
-		setTimeout(function() {listPerDate.addExistDataFlg() }, 3000);
+		setTimeout(function() { listPerDate.addExistDataFlg(); }, 1000);
 	} );
 
 	function updateMonthYear() {				
@@ -129,6 +153,8 @@ $(document).ready(function() {
 		// カレンダー表示
 		showCalendar();
 		// カレンダークリックイベント追加
-		listPerDate.addClickEvent();
+		listPerDate.addCalClickEvent();
+		// 削除ボタンクリックイベント追加
+		listPerDate.addDelBtnClickEvent();
 	});
 });

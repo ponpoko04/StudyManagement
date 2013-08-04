@@ -14,6 +14,7 @@ routes = [
   ('/register',           'studyManagement.MainPage'),
   ('/listPerDate/search', 'listPerDate.ListPerDate'),
   ('/listPerDate/update', 'listPerDate.UpdateExistDate'),
+  ('/listPerDate/delete', 'listPerDate.DeleteStudyUnit'),
   ('/listPerDate',        'listPerDate.ListPerDate'),
   ('/subject',            'subjectMainte.SubjectMainte'),
   ('/updateSubject',      'subjectMainte.UpdateSubject'),

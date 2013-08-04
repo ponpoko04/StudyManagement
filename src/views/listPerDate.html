@@ -11,15 +11,15 @@
 				maximum-scale = 3.0 ,
 				user-scalable = yes ,
 				target-densitydpi = device-dpi" />
-		<meta http-equiv="Content-Script-Type" content="text/javascript">
+<!-- 		<meta http-equiv="Content-Script-Type" content="text/javascript"> -->
 		<title>SelfStudyManagement</title>
 		<link rel="shortcut icon" href="//ayastudymg.appspot.com/img/favicon.ico" type="/img/favicon.ico">
 		<link rel="apple-touch-icon" href="//ayastudymg.appspot.com/img/apple-touch-icon.png" />
 		<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css">
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
 		<link type="text/css" rel="stylesheet" href="/stylesheets/buttons.css">
-		<link type="text/css" rel="stylesheet" href="/stylesheets/calendar.css" />
-		<link type="text/css" rel="stylesheet" href="/stylesheets/custom_2.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/calendar.css">
+		<link type="text/css" rel="stylesheet" href="/stylesheets/custom_2.css">
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/modernizr.custom.63321.js"></script>
 		<script type="text/javascript" src="/js/jquery.calendario.js"></script>
@@ -95,12 +95,14 @@
 							<col style="width: 100px;" />
 							<col style="width: 300px;" />
 							<col style="width: 130px;" />
+							<col style="width: 40px;" />
 						</colgroup>
 						<thead>
 							<tr>
 								<th><span style="display:inline-block; width:40px;">科目</span></th>
 								<th><span style="display:inline-block; width:40px;">内容</span></th>
 								<th><span style="display:inline-block; width:40px;">時間</span></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -116,6 +118,10 @@
 								<td style="text-align: right;">
 									<span style="display:inline-block;">{{ studyUnit.studyTimeHour }} 時間</span>
 									<span style="display:inline-block;">{{ studyUnit.studyTimeMinute }} 分</span>
+								</td>
+								<td>
+									<input type="submit" id="delete{{ forloop.counter0 }}" value="削除"
+										   name="{{ studyUnit.key }}" class="Js-DeleteStudyUnit">
 								</td>
 							</tr>
 							{% endif %}
