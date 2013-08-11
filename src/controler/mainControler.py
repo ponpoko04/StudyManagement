@@ -10,6 +10,7 @@ Created on 2013/06/26
 import datetime
 from google.appengine.api import users
 import datamodels
+import Tzinfo
 
 class mainControler(object):
     '''
@@ -23,7 +24,7 @@ class mainControler(object):
         self.url = ''
         self.url_linktext = ''
         self.isAuth = True
-        self.d = datetime.datetime.now()
+        self.d = Tzinfo.jst_date(datetime.datetime.now())
 
     def createLoginInfo(self, reqUri):
         '''

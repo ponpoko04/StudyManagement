@@ -10,6 +10,7 @@ Created on 2013/06/29
 import os
 import testconfig
 import unittest
+import datetime
 
 #スタブをインポート
 from google.appengine.api import apiproxy_stub_map
@@ -51,6 +52,10 @@ class GAETestBase(unittest.TestCase):
 
 #mainControlerクラステスト
 class test_mainControler(GAETestBase):
+
+    def test_hoge(self):
+        controler = mainControler()
+        self.assertEqual((controler.d + datetime.timedelta(hours=15)).hour, datetime.datetime.now().hour, "not gae timezone")
 
     def test_getYearsList(self):
         #年の配列を取得するテスト

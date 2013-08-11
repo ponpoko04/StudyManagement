@@ -10,8 +10,13 @@ Created on 2013/06/29
 import os
 import sys
 
-GAE_HOME = 'D:\Private\Google\google_appengine'
-PROJECT_HOME = 'D:\Private\Python\StudyManagement\StudyManagement'
+#Windows環境
+#GAE_HOME = 'D:\Private\Google\google_appengine'
+#PROJECT_HOME = 'D:\Private\Python\StudyManagement\StudyManagement'
+
+#Mac環境
+GAE_HOME = '/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine'
+PROJECT_HOME = '/Users/Takayoshi_Uchida/Develop/workspace/StudyManagement'
 
 #テストで使用するGAEのモジュールパス
 EXTRA_PATHS = [

@@ -57,4 +57,6 @@ $(document).ready(function() {
 		common.btnEnabled($button);
 		return 
 	});
+	
+	$('.box-lid-menu').boxLid();
 });
