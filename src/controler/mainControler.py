@@ -11,6 +11,7 @@ import datetime
 from google.appengine.api import users
 import datamodels
 import Tzinfo
+from operator import attrgetter
 
 class mainControler(object):
     '''
@@ -89,10 +90,9 @@ class mainControler(object):
                                                     tmpStudyHours, tmpStudyMinutes)
 
             #画面項目リスト作成処理
-            for key in tmpStudyHours.keys():
-                studyTimes.append(datamodels.StudyTime(key, tmpStudyHours[key], tmpStudyMinutes[key]))
+            studyTimes = [datamodels.StudyTime(key, tmpStudyHours[key], tmpStudyMinutes[key]) for key in tmpStudyHours.keys()]
 
-        return studyTimes
+        return sorted(studyTimes,key=attrgetter('subjectName'))
 
     def sumUpHours(self, subjectName, hour, tmpStudyHours):
         '''

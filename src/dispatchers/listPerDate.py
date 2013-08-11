@@ -11,6 +11,7 @@ import os
 import webapp2
 import datetime
 import json
+import Tzinfo
 
 import dsmodels
 
@@ -27,9 +28,9 @@ class ListPerDate(webapp2.RequestHandler):
         日付別一覧 初期表示
         '''
 
-        today = datetime.datetime.now()
+        today = Tzinfo.jst_date(datetime.datetime.now())
         today = str(today.year) + str(today.month).zfill(2) + str(today.day).zfill(2)
-        studyUnits = dsmodels.StudyUnit.all().filter('registrant = ', users.get_current_user()).filter('timeStamp = ', today)
+        studyUnits = dsmodels.StudyUnit.all().filter('registrant = ', users.get_current_user()).filter('timeStamp = ', today).order('updateDate')
         existDataLists = (ListPerDate()).getExistData(today)
 
         template_values = {

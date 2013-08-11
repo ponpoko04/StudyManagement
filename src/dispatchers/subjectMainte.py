@@ -24,7 +24,7 @@ class SubjectMainte(webapp2.RequestHandler):
         '''
         科目メンテ 初期表示
         '''
-        subjects = dsmodels.Subject.all().filter('registrant = ', users.get_current_user())
+        subjects = dsmodels.Subject.all().filter('registrant = ', users.get_current_user()).order('subjectName')
 
         template_values = {
             'subjects': subjects

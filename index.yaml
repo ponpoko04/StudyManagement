@@ -13,4 +13,50 @@ indexes:
 - kind: StudyUnit
   properties:
   - name: registrant
+  - name: subject
+
+- kind: StudyUnit
+  properties:
+  - name: registrant
   - name: timeStamp
+
+- kind: StudyUnit
+  properties:
+  - name: registrant
+  - name: timeStamp
+  - name: subject
+
+- kind: StudyUnit
+  properties:
+  - name: registrant
+  - name: timeStamp
+  - name: updateDate
+
+- kind: StudyUnit
+  properties:
+  - name: registrant
+  - name: timeStamp
+  - name: updateDate
+    direction: desc
+
+- kind: StudyUnit
+  properties:
+  - name: registrant
+  - name: updateDate
+
+- kind: StudyUnit
+  properties:
+  - name: registrant
+  - name: updateDate
+    direction: desc
+
+- kind: Subject
+  properties:
+  - name: registrant
+  - name: subjectName
+
+- kind: Subject
+  properties:
+  - name: registrant
+  - name: subjectName
+    direction: desc

@@ -37,7 +37,7 @@ class MainPage(webapp2.RequestHandler):
                  "20","21","22","23"]
         minutes = ["00","10","20","30","40","50"]
 
-        subjects = dsmodels.Subject.all().filter('registrant = ', users.get_current_user())
+        subjects = dsmodels.Subject.all().filter('registrant = ', users.get_current_user()).order('subjectName')
         studyUnits = dsmodels.StudyUnit.all().filter('registrant = ', users.get_current_user())
         studyTimes = controler.sumUpStudyHours(studyUnits)
 
